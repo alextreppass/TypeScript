@@ -7,14 +7,14 @@
 //// export function foo() {};
 
 // @Filename: a/foo.ts
-//// export { foo } from "bar";
+//// export { foo } from "bar"; 
 
 verify.importFixAtPosition([
-`import { foo } from "bar";
+`import { foo } from "./foo";
 
 foo();`,
 
-`import { foo } from "./foo";
+`import { foo } from "bar";
 
 foo();`,
 ]);

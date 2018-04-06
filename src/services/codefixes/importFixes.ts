@@ -310,7 +310,7 @@ namespace ts.codefix {
                 In this case we should prefer using the relative path "../a" instead of the baseUrl path "foo/a".
                 */
                 const pathFromSourceToBaseUrl = getRelativePath(baseUrl, sourceDirectory, getCanonicalFileName);
-                const relativeFirst = getRelativePathNParents(relativePath) < getRelativePathNParents(pathFromSourceToBaseUrl);
+                const relativeFirst = getRelativePathNParents(pathFromSourceToBaseUrl) < getRelativePathNParents(relativePath);
                 return relativeFirst ? [relativePath, importRelativeToBaseUrl] : [importRelativeToBaseUrl, relativePath];
             });
             return modulePathsGroups.map(group => group.map(moduleSpecifier => ({ moduleSpecifier, importKind })));

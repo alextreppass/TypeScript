@@ -2589,10 +2589,12 @@ Actual: ${stringify(fullActual)}`);
                 actualTextArray.push(text);
                 scriptInfo.updateContent(originalContent);
             }
-            if (expectedTextArray.length !== actualTextArray.length) {
-                this.raiseError(`Expected ${expectedTextArray.length} import fixes, got ${actualTextArray.length}`);
+            const sortedExpectedArray = expectedTextArray.sort();
+            const sortedActualArray = actualTextArray.sort();
+            if (sortedExpectedArray.length !== sortedActualArray.length) {
+                this.raiseError(`Expected ${sortedExpectedArray.length} import fixes, got ${sortedActualArray.length}`);
             }
-            ts.zipWith(expectedTextArray, actualTextArray, (expected, actual, index) => {
+            ts.zipWith(sortedExpectedArray, sortedActualArray, (expected, actual, index) => {
                 if (expected !== actual) {
                     this.raiseError(`Import fix at index ${index} doesn't match.\n${showTextDiff(expected, actual)}`);
                 }
